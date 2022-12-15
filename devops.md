@@ -10,8 +10,7 @@ b. -p argument can be left empty and password will be asked afterwards OR wrappe
 
 ## Command Prompt (Windows)
 1. Login to SSH - `ssh user@host` you can copy the command here  
-Then asks for password - cannot be copied!
-Navigate to directories like - cd www
+Aftewards, asks for password - cannot be copied! Finally, navigate to directories like - cd www
 
 2. Move db to local, directly type in windows powershell 
 `ssh root@ipaddress "mysqldump -u dbuser -p dbname | gzip -9" > dblocal.sql.gz`  
@@ -22,8 +21,8 @@ You will be ask first for SSH pass and then DB pass
 `scp -r /path/local user@host:/path/ftp/`  
 `scp -r D:/Development/Themes/flatsome wp13584349@wp13584349.server-he.de:/is/htdocs/wp13584349_AK66NKDK4T/www/shopkit/wp-content/themes`  
 
-4. Extract tgz file - navigate to the folder https://www.hostinger.com/tutorials/how-to-extract-or-make-archives-via-ssh/
-`tar -xvf archive.tar.gz` - extracts to the SAME folder where the file is  
+4. Extract tgz file - navigate to the folder https://www.hostinger.com/tutorials/how-to-extract-or-make-archives-via-ssh/  
+`tar -xvf archive.tar.gz` - extracts to the SAME folder where the file is   
 `tar -xvf archive.tar.gz -C /tmp/files` - separate folder  
 
 5. Search in files  
