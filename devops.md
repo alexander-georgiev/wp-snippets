@@ -1,12 +1,13 @@
-WinSCP - Terminal
+## WinSCP - Terminal
 1. Remove folder
 rm -rf /path/to/directory
+
 2. Export db - mysqldump -u -p DBNAME > backup.sql --no-tablespaces
 mysqldump -udbu13616068 '-pAKQGU8zW' db13616068-hesse > backup.sql --no-tablespaces - example uses global db user
 a. –no-tablespaces is required for error 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
 b. -p argument can be left empty and password will be asked afterwards OR wrapped entirely with single quotes to escape special chars in password, e.g. round brackets.
 
-/* Command Prompt (Windows) */
+## /* Command Prompt (Windows) */
 1. Login to SSH - command prompt
 ssh user@host - you can copy the command here
 Then asks for password - cannot be copied!
