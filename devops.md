@@ -1,9 +1,10 @@
 ## WinSCP - Terminal
-1. Remove folder
+1. Remove folder  
 `rm -rf /path/to/directory`
 
-2. Export db - mysqldump -u -p DBNAME > backup.sql --no-tablespaces
-  mysqldump -udbu13616068 '-pAKQGU8zW' db13616068-hesse > backup.sql --no-tablespaces - example uses global db user
+2. Export db 
+  `mysqldump -u -p DBNAME > backup.sql --no-tablespaces`
+  `mysqldump -udbu13616068 '-pAKQGU8zW' db13616068-hesse > backup.sql --no-tablespaces`
 a. –no-tablespaces is required for error 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
 b. -p argument can be left empty and password will be asked afterwards OR wrapped entirely with single quotes to escape special chars in password, e.g. round brackets.
 
