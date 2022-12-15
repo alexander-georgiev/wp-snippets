@@ -1,6 +1,6 @@
 ## WinSCP - Terminal
 1. Remove folder
-  rm -rf /path/to/directory
+`rm -rf /path/to/directory`
 
 2. Export db - mysqldump -u -p DBNAME > backup.sql --no-tablespaces
   mysqldump -udbu13616068 '-pAKQGU8zW' db13616068-hesse > backup.sql --no-tablespaces - example uses global db user
