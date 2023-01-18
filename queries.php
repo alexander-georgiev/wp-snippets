@@ -1,4 +1,22 @@
 <?php 
+function searchfilter($query)
+{
+
+	if ($query->is_search && !is_admin()) {
+		global $current_user;
+		if ($current_user->display_name == 'admin') {
+			$post_in = $query->get('post__in');
+			$query->set('post__in', $post_in);
+			//$query->set('tax_query', array());
+			//echo tdebug($query);
+		}
+	}
+
+	return $query;
+}
+
+add_filter('pre_get_posts', 'searchfilter');
+
 function order_by_stock_status($posts_clauses)
 {
 
