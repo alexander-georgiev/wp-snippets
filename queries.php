@@ -1,3 +1,4 @@
+<?php 
 function order_by_stock_status($posts_clauses)
 {
 
