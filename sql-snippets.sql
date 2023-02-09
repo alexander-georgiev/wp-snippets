@@ -20,10 +20,10 @@ WHERE B_BI.meta_id IS NULL;
 
 /* 4. After Update table prefix options and usermet must be updated too */
 SELECT * FROM wp_options WHERE option_name LIKE '%wpstg%'
-UPDATE 'wp_options' SET option_name = REPLACE(option_name, 'oldprefix_', 'newprefix_' );
+UPDATE wp_options SET option_name = REPLACE(option_name, 'oldprefix_', 'newprefix_' );
 
 SELECT * FROM wp_usermeta WHERE meta_key LIKE '%wpstg_%'
-UPDATE 'wp_usermeta' SET 'meta_key' = REPLACE('meta_key , 'oldprefix_', 'newprefix_' );
+UPDATE wp_usermeta SET meta_key = REPLACE('meta_key , 'oldprefix_', 'newprefix_' );
 
 /* 5. Trash products */
 UPDATE wp_posts SET post_status = 'trash' WHERE post_type = 'product';
@@ -68,3 +68,6 @@ AND pm2.`meta_key` = 'usage_count'
 AND pm2.`meta_value` = 1
 AND p.`post_type` = 'shop_coupon'
 AND p.`post_title` LIKE 'SL%'
+
+/* 14. Sort column by size */
+SELECT * FROM wp_postmeta ORDER BY LENGTH(meta_value) DESC;
