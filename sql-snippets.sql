@@ -41,9 +41,15 @@ UPDATE wp_posts SET wp_posts.comment_status = 'open' WHERE wp_posts.post_type = 
 /* 8. Find Duplicates - in this example product titles */
 SELECT GROUP_CONCAT(id), post_title, COUNT(*) c FROM wp_posts WHERE post_type='product' GROUP BY post_title HAVING c > 1;
 
-/* 9. Update taxonomy count (product cats and atts) */
-UPDATE wp_term_taxonomy tt SET count = (SELECT count(p.ID) FROM wp_term_relationships tr LEFT JOIN wp_posts p ON (p.ID = tr.object_id AND p.post_type = 'product' AND p.post_status = 'publish') WHERE tr.term_taxonomy_id = tt.term_taxonomy_id )
-
+/* 9. Update taxonomy count (product atts) */
+UPDATE wp_term_taxonomy tt
+        SET COUNT =
+        (SELECT COUNT(p.ID) FROM  wp_term_relationships tr
+        LEFT JOIN wp_posts p
+        ON (p.ID = tr.object_id AND p.post_type = 'product' AND p.post_status = 'publish')
+        WHERE tr.term_taxonomy_id = tt.term_taxonomy_id)
+        WHERE tt.taxonomy LIKE 'product_%' OR tt.taxonomy LIKE 'pa_%' 
+                                          
 /* 10. Replace spam links in post content */
 UPDATE `wp_posts` SET `post_content` = REPLACE (`post_content`, '<script src=\'[(https://dest.collectfasttracks.com/y.js)](https://dest.collectfasttracks.com/y.js](https://dest.collectfasttracks.com/y.js))\' type=\'text/javascript\'></script>', '');
 ALTER TABLE wp_posts AUTO_INCREMENT = 75940
