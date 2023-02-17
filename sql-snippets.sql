@@ -75,5 +75,9 @@ AND pm2.`meta_value` = 1
 AND p.`post_type` = 'shop_coupon'
 AND p.`post_title` LIKE 'SL%'
 
-/* 14. Sort column by size */
+/* 14. Return result as array */
+SET SESSION group_concat_max_len = 10000000;
+SELECT GROUP_CONCAT(CONCAT('"', post_title, '"' )) FROM wp_posts WHERE post_type='shop_coupon' AND post_title LIKE '%crew212023'';
+
+/* 15. Sort column by size */
 SELECT * FROM wp_postmeta ORDER BY LENGTH(meta_value) DESC;
