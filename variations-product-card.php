@@ -1,3 +1,4 @@
+<?php /* first option */
 function child_variations_card()
 {
 	global $product;
@@ -48,6 +49,56 @@ function child_variations_card()
 }
 
 add_action( 'woocommerce_after_shop_loop_item','child_variations_card' );
+/* second option */
+function display_colors_in_product_variations_card() {
+    global $product;
+    if ($product->is_type("variable")) {
+        ?>
+
+        <?php $variation_ids = $product->get_children();
+        $count = 1;
+        if ($variation_ids) :
+            echo '<div class="variations-wrapper">';
+            foreach ($variation_ids as $variation_id) {
+                $single_variation = wc_get_product($variation_id);
+
+                // if ($single_variation->get_stock_status() !== 'instock' || !$single_variation || !$single_variation->exists()) continue;
+                if ($single_variation->get_stock_status() == 'outofstock' || !$single_variation || !$single_variation->exists()) continue;
+
+                $atts = $single_variation->get_attributes();
+                foreach ($atts as $tax_name => $att) {
+                    if (!in_array($tax_name, list_attributes_colour()))
+                        continue 2;
+                }
+                $color_slug = reset($atts); //get first element value (usually color)
+                $taxonomy_name = key($atts); //get first el key               
+                $term = get_term_by('slug', $color_slug, $taxonomy_name);
+                $term_id = $term->term_id;
+                $color = get_term_meta($term_id, 'product_attribute_color', true);
+                //$link = get_the_permalink() . '?attribute_' . $taxonomy . '=' . $data['attributes'][$taxonomy];
+                $hidden = '';
+                if ($term->term_id == 2380) $color = '#fff';
+                if ($count > 4) $hidden = 'hidden';
+        ?>
+                <div class="variation-wrapper <?php echo $hidden; ?>" data-variation-id="<?php echo $variation_id; ?>">
+                    <a class="variation" style="background-color: <?php echo $color; ?>" title="<?php echo $color_slug; ?>">&nbsp;</a>
+                </div>
+        <?php
+                $count++;
+            }
+            echo '</div>';
+        endif;
+        ?>
+
+
+    <?php if ($count > 4) {
+   
+         echo '<a class="btn-more-variations">Mehr</a>';
+    }
+    }
+}
+add_action('flatsome_product_box_after', 'display_colors_in_product_variations_card');
+
 
 function child_variation_change() {
 	$product = wc_get_product($_POST['productId']);
