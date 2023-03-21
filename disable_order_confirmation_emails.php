@@ -14,7 +14,7 @@ function disable_recipient_processing_orders($recipient, $order) {
 add_filter('woocommerce_email_recipient_customer_processing_order' . 'disable_recipient_processing_orders', 10, 2);
 function disable_pending_email_for_cc_payments($enabled, $order) {
     $static_payments = array('bacs', 'invoice');
-    if (!in_array($order->get_payment_method(), $static_payments) && !$order->is_paid()) {
+    if ($order instanceof WC_Order && !in_array($order->get_payment_method(), $static_payments) && !$order->is_paid()) {
         $enabled = false;
     }
     return $enabled;
