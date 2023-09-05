@@ -1,3 +1,5 @@
+<?php 
+
 function aaptc_add_product_to_cart($item_key, $product_id) {
     $target_product_id    = 445;
     if (!is_admin() && ($product_id == $target_product_id)) {
