@@ -8,4 +8,3 @@ Wordpress already has an internal "WP-Cron", but it only runs when visitors are 
 3. Now assign the rights 750 for this file and then enter this as a cron job in the HIS.
   1. Add Script file path (/www/kinderschuh2022/wp-cron.sh ) and set time (30min e.g.)
   2. No Parameter is needed
-  3. 
