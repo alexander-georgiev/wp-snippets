@@ -12,7 +12,8 @@ Wordpress already has an internal "WP-Cron", but it only runs when visitors are 
 5. Specify time/recurrance -> `*/5 * * * * /home/oracle/scripts/export_dump.sh` - every 5mins
     1. Reference - https://en.wikipedia.org/wiki/Cron
 ## Example Cron PHP
-`public function __construct() {
+```php
+public function __construct() {
         add_action('vinx_update_products', array($this, 'processProduct'));
         add_action('vinx_update_products', array($this, 'vinx_update_products_function'));
         add_action('admin_init', array($this, 'initCrons'));
@@ -40,4 +41,5 @@ public function vinx_update_products_function() {
     $time_format .= ':s';
     $current_date = date_i18n($date_format . ' ' . $time_format);
     file_put_contents(wp_normalize_path(__DIR__) . '/cron_debug.log', 'Process Products Cron ran at: ' . $current_date . "\n", FILE_APPEND);
-}`
+}
+```
