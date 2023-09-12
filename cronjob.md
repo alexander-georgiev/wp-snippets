@@ -11,3 +11,33 @@ Wordpress already has an internal "WP-Cron", but it only runs when visitors are 
     2. No Parameter is needed
 5. Specify time/recurrance -> `*/5 * * * * /home/oracle/scripts/export_dump.sh` - every 5mins
     1. Reference - https://en.wikipedia.org/wiki/Cron
+## Example Cron PHP
+`public function __construct() {
+        add_action('vinx_update_products', array($this, 'processProduct'));
+        add_action('vinx_update_products', array($this, 'vinx_update_products_function'));
+        add_action('admin_init', array($this, 'initCrons'));
+        add_filter('cron_schedules', [$this, 'example_add_cron_interval']);
+}
+public function initCrons() {
+ if (!wp_next_scheduled('vinx_update_products')) {
+            wp_schedule_event(time(), 'every_minute', 'vinx_update_products'); //every min
+            //or
+            wp_schedule_event(strtotime(21:00:00), 'daily_at_21', 'vinx_update_products'); //daily at 21
+        }
+}
+public function example_add_cron_interval($schedules) {
+    $schedules['daily_at_21'] = array(
+        'interval' => 86400, // 24 hours in seconds
+        'display' => esc_html__('Daily at 21:00'),
+    );      
+    return $schedules;
+}
+public function vinx_update_products_function() {
+    // Add code to perform the cron task here
+    // For debugging, you can log to a file
+    $date_format = get_option('date_format');
+    $time_format = get_option('time_format');
+    $time_format .= ':s';
+    $current_date = date_i18n($date_format . ' ' . $time_format);
+    file_put_contents(wp_normalize_path(__DIR__) . '/cron_debug.log', 'Process Products Cron ran at: ' . $current_date . "\n", FILE_APPEND);
+}`
