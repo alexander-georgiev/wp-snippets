@@ -3,8 +3,9 @@ Wordpress already has an internal "WP-Cron", but it only runs when visitors are 
 1. First, disable WP Cron by typing the following line above "That's all, stop editing! Happy blogging." enter in your wp-config.php: `define('DISABLE_WP_CRON', true);`
 2. Now create a file **wp-cron.shin** your Wordpress directory with the following content: \
 `#!/bin/sh`\
-`wget -O - -q "http://www.nur-ein-beispiel.de/wp-cron.php?doing_wp_cron" > /dev/null`\
+`wget -O - -q "https://website-name.com/wp-cron.php?doing_wp_cron" > /dev/null`\
 `exit 0`
-3. Now assign the rights 750 for this file and then enter this as a cron job in the HIS.
+    1. If there is no file field, you can add it as command - `wget -q -O /dev/null 'https://denzweine.ch/wp-cron.php' >/dev/null 2>&1` - Cyon
+4. Now assign the rights 750 for this file and then enter this as a cron job in the HIS.
     1. Add Script file path (/www/kinderschuh2022/wp-cron.sh) and set time (30min e.g.)
     2. No Parameter is needed
