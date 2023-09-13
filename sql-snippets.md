@@ -1,4 +1,5 @@
 /* 1. Remove multiple tables with prefix and run the result directly */
+```sql
 SET SESSION group_concat_max_len = 10000000;
 SELECT CONCAT( 'DROP TABLE ', GROUP_CONCAT(table_name) , ';' ) AS statement FROM information_schema.tables  WHERE table_name LIKE 'wpstg0_%';
 
@@ -81,3 +82,4 @@ SELECT GROUP_CONCAT(CONCAT('"', post_title, '"' )) FROM wp_posts WHERE post_type
 
 /* 15. Sort column by size */
 SELECT * FROM wp_postmeta ORDER BY LENGTH(meta_value) DESC;
+```
