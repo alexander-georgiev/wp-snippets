@@ -2,11 +2,14 @@
 ```sql
 SET SESSION group_concat_max_len = 10000000;
 SELECT CONCAT( 'DROP TABLE ', GROUP_CONCAT(table_name) , ';' ) AS statement FROM information_schema.tables  WHERE table_name LIKE 'wpstg0_%';
-
+```
 /* 2. Update table prefix */
+```sql
 RENAME TABLE `old_name` TO `new_name
+```
 
 /* 3. Update table */
+```sql
 INSERT INTO `db13648154-stage3`.`wp_postmeta` (
   `meta_id`,
   `post_id`,
@@ -18,13 +21,16 @@ FROM `db13648154-courl`.`wp_postmeta` AS B
 LEFT JOIN `db13648154-stage3`.`wp_postmeta` AS B_BI 
     ON B.meta_id = B_BI.meta_id
 WHERE B_BI.meta_id IS NULL;
+```
 
 /* 4. After Update table prefix options and usermet must be updated too */
+```sql
 SELECT * FROM wp_options WHERE option_name LIKE '%wpstg%'
 UPDATE wp_options SET option_name = REPLACE(option_name, 'oldprefix_', 'newprefix_' );
 
 SELECT * FROM wp_usermeta WHERE meta_key LIKE '%wpstg_%'
 UPDATE wp_usermeta SET meta_key = REPLACE('meta_key , 'oldprefix_', 'newprefix_' );
+```
 
 /* 5. Trash products */
 UPDATE wp_posts SET post_status = 'trash' WHERE post_type = 'product';
