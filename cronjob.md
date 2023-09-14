@@ -23,7 +23,7 @@ public function initCrons() {
  if (!wp_next_scheduled('vinx_update_products')) {
             wp_schedule_event(time(), 'every_minute', 'vinx_update_products'); //every min
             //or
-            wp_schedule_event(strtotime(21:00:00), 'daily_at_21', 'vinx_update_products'); //daily at 21
+            wp_schedule_event(strtotime('21:00:00'), 'daily_at_21', 'vinx_update_products'); //daily at 21
         }
 }
 public function example_add_cron_interval($schedules) {
