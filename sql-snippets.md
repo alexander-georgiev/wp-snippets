@@ -100,3 +100,7 @@ SELECT GROUP_CONCAT(CONCAT('"', post_title, '"' )) FROM wp_posts WHERE post_type
 ```sql
 SELECT * FROM wp_postmeta ORDER BY LENGTH(meta_value) DESC;
 ```
+16. Get table sizes
+```sql
+SELECT table_name, round(((data_length + index_length) / 1024 / 1024), 2) SIZE_MB FROM information_schema.TABLES WHERE table_schema=DATABASE() ORDER BY (data_length + index_length) DESC
+```
