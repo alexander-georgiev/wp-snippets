@@ -111,3 +111,31 @@ ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "Size (MB)"
 FROM information_schema.TABLES 
 GROUP BY table_schema;
 ```
+18. alternative for update_post_meta() with $wpdb -> manually update or insert post_meta.
+```php
+// Check if the meta_key exists for the post_id
+$existing_meta_id = $wpdb->get_var($wpdb->prepare(
+    "SELECT meta_id FROM {$wpdb->prefix}postmeta WHERE post_id = %d AND meta_key = %s",
+    $post_id,
+    $meta_key
+));
+
+if ($existing_meta_id) {
+    // Update existing meta_key
+    $sql = $wpdb->prepare(
+        "UPDATE {$wpdb->prefix}postmeta SET meta_value = %s WHERE meta_id = %d",
+        $meta_value,
+        $existing_meta_id
+    );
+} else {
+    // Insert new meta_key
+    $sql = $wpdb->prepare(
+        "INSERT INTO {$wpdb->prefix}postmeta (post_id, meta_key, meta_value) VALUES (%d, %s, %s)",
+        $post_id,
+        $meta_key,
+        $meta_value
+    );
+}
+
+$wpdb->query($sql);
+```
