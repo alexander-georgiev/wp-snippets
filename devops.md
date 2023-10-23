@@ -37,10 +37,10 @@ du -msh * - shows all files and folder sizes in the current path
 du -h * - prints ALL child -> child folders
 
 8. Find file extensions - ends with .webp  
-`find . -type f -name '*.webp'`
+`find . -type f -name '*.webp'`  
    8.2 stricktly ends with *.webp (no .jpg.webp)  
    `find . -type f -name '*.webp' ! -name '*.*.webp'`
 10. Rename files which strictly ends with .webp to .jpeg  
     `find . -type f -name '*.webp' ! -name '*.*.webp' -exec sh -c 'mv "$1" "$(dirname "$1")/$(basename "$1" .webp).jpeg"' sh {} \;`
-11. Delete files which ends with .jpg.webp  
-    `find . -type f -name '*.jpg.webp' -exec rm {} \;`
+11. Delete files which ends with .jpg.webp, png.webp, .bk.  
+    `find . -type f \( -name '*.jpg.webp' -o -name '*.png.webp' -o -name '*.bk.*' \) -exec rm {} \;`
