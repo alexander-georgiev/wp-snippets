@@ -35,11 +35,12 @@ You will be ask first for SSH pass and then DB pass
 `du -msh uploads/`  
 du -msh * - shows all files and folder sizes in the current path  
 du -h * - prints ALL child -> child folders
-7. Find file extensions - ends with .webp
+
+8. Find file extensions - ends with .webp  
 `find . -type f -name '*.webp'`
-7.2 stricktly ends with *.webp (no .jpg.webp)
+   8.2 stricktly ends with *.webp (no .jpg.webp)  
    `find . -type f -name '*.webp' ! -name '*.*.webp'`
-9. Rename files which strictly ends with .webp to .jpeg
+10. Rename files which strictly ends with .webp to .jpeg  
     `find . -type f -name '*.webp' ! -name '*.*.webp' -exec sh -c 'mv "$1" "$(dirname "$1")/$(basename "$1" .webp).jpeg"' sh {} \;`
-11. Delete files which ends with .jpg.webp
+11. Delete files which ends with .jpg.webp  
     `find . -type f -name '*.jpg.webp' -exec rm {} \;`
