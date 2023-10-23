@@ -36,7 +36,7 @@ You will be ask first for SSH pass and then DB pass
 du -msh * - shows all files and folder sizes in the current path  
 du -h * - prints ALL child -> child folders
 7. Find file extensions - ends with .webp
-   `find . -type f -name '*.webp'`
+`find . -type f -name '*.webp'`
 7.2 stricktly ends with *.webp (no .jpg.webp)
    `find . -type f -name '*.webp' ! -name '*.*.webp'`
 9. Rename files which strictly ends with .webp to .jpeg
