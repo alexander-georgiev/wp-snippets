@@ -2,6 +2,9 @@
 /* Useful for debugging when working on posts (add/edit/trash), taxonomies or any hard debugging functions */
 function wpdebug() {
         $content = ['object_id' => $object_id, 'terms' => $terms];
+        //php debug alternatives
+        //$debug_ex = new Exception('mydebug');
+        //$trace = $debug_ex->getTraceAsString();
         $debugs = debug_backtrace();
         foreach ($debugs as $debug) {
             //we can comment this out to check our plugin
